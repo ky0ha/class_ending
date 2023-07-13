@@ -49,7 +49,7 @@ def process_form_data(data = Body()):
     bk_img = Image.open(bk_img_path)
 
     #设置需要显示的字体
-    fontpath = "font/simsun.ttc"    
+    fontpath = "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc"     
     draw = ImageDraw.Draw(bk_img)
 
     # 班级名称规范化
