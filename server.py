@@ -76,6 +76,10 @@ def process_form_data(data = Body()):
 
     return {"status": 1}
 
+@app.get("/{type}/{file}")
+def page_load(type:str, file:str):
+    return FileResponse(f'./web/{type}/{file}')
+
 @app.get("/api/ending/{file}")
 def get_file(file: str):
     return FileResponse("temp.jpg", media_type="application/octet-stream")
