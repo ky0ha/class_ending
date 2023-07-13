@@ -76,10 +76,6 @@ def process_form_data(data = Body()):
 
     return {"status": 1}
 
-@app.get("/{type}/{file}")
-def page_load(type:str, file:str):
-    return FileResponse(f'./web/{type}/{file}')
-
 @app.get("/api/ending/{file}")
 def get_file(file: str):
     return FileResponse("temp.jpg", media_type="application/octet-stream")
@@ -90,3 +86,7 @@ app.mount("/api/ending", StaticFiles(directory="./web/html/", html=True), name="
 @app.get("/api/ending")
 async def index_response():
     return FileResponse("./web/html/index.html")
+
+@app.get("/{type}/{file}")
+def page_load(type:str, file:str):
+    return FileResponse(f'./web/{type}/{file}')
