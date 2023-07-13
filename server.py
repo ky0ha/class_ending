@@ -87,6 +87,10 @@ app.mount("/api/ending", StaticFiles(directory="./web/html/", html=True), name="
 async def index_response():
     return FileResponse("./web/html/index.html")
 
+@app.options("/api/ending")
+def check_options():
+    return 1
+
 @app.get("/{type}/{file}")
 def page_load(type:str, file:str):
     return FileResponse(f'./web/{type}/{file}')
