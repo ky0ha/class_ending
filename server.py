@@ -1,8 +1,9 @@
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI
+from fastapi import FastAPI, Form, Body
 from pydantic import BaseModel
 from PIL import ImageFont, ImageDraw, Image
-from io import BytesIO
+import time
+from starlette.responses import FileResponse
 
 
 app = FastAPI()
@@ -17,28 +18,31 @@ app.add_middleware(
 )
 
 
-class FormData(BaseModel):
-    sname: str
-    cname: str
-    date: str
-    tname: str
+# class FormData(BaseModel):
+#     sname: str
+#     cname: str
+#     date: str
+#     tname: str
 
 
 @app.post('/api/ending')
-def process_form_data(data: FormData = {"sname": "陈思宇", "cname": "周日 14:45", "date": "2023-7-13", "tname": "杨斌"}):
+def process_form_data(data = Body()):
+    print(data)
     class Date():
         def __init__(self, date):
             self.year, self.month, self.day = date.split('-')
+            self.month = f"{self.month:0>2}"
+            self.day = f"{self.day:0>2}"
 
     print("---------start-----------")
 
     # 获取参数
-    sname = args.name
-    cname = args.cname
-    date = Date(args.date)
-    tname = args.teacher
+    sname: str = data['sname']
+    cname: str = data['cname']
+    date: Date = Date(data['date'])
+    tname: str = data['tname']
     bk_img_path = r"结课通知单.jpg"
-    current_time = Date(time.strftime("%Y-%m-%d"))
+    current_time: Date = Date(time.strftime("%Y-%m-%d"))
 
     # 图片路径
     bk_img = Image.open(bk_img_path)
@@ -47,6 +51,12 @@ def process_form_data(data: FormData = {"sname": "陈思宇", "cname": "周日 1
     fontpath = "font/simsun.ttc"    
     draw = ImageDraw.Draw(bk_img)
 
+    # 班级名称规范化
+    if "：" in cname:
+        cname = cname.replace("：", ":")
+    if cname[2]!=' ':
+        cname = cname[:2] + ' ' + cname[3:]
+    
     draw.text((500, 1745), sname, font = ImageFont.truetype(fontpath, 75), fill = (25, 25, 25))
     draw.text((585, 2085), cname, font = ImageFont.truetype(fontpath, 50), fill = (25, 25, 25), width=255)
     draw.text((1077, 2195), date.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
@@ -59,14 +69,13 @@ def process_form_data(data: FormData = {"sname": "陈思宇", "cname": "周日 1
     draw.text((2088, 3232), current_time.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
 
     # 保存图片到字节流
-    image_bytes = BytesIO()
-    image.save(image_bytes, format='PNG')
-    image_bytes.seek(0)
-
-    # 保存图片路径
-    bk_img.save(r"result.jpg")
-    # cv2.imwrite("C:\\Users\\25315\\Desktop\\add_text.png", bk_img, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+    bk_img.save("temp.jpg", format='JPEG')
+    
     print("---------end-----------")
 
+    return {"status": 1}
 
-    return image_bytes
+@app.get("/api/ending/{file}")
+def get_file(file: str):
+    return FileResponse("temp.jpg", media_type="application/octet-stream")
+
