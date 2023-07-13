@@ -13,11 +13,28 @@
         <label for="sname">学生姓名：</label>
         <input type="text" id="sname" name="sname" required><br><br>
 
-        <label for="cname">所在班级（周x xx:xx）</label>
-        <input type="text" id="cname" name="cname" required><br><br>
+        <!-- <label for="cname">所在班级（周x xx:xx）</label>
+        <input type="text" id="cname" name="cname" required><br><br> -->
+        <label for="cname">所在班级（周x xx:xx） 周几：</label>
+        <select name="day" id="day" required>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+        </select>
+        <label for="time">班级时间：</label>
+        <select id="time" name="time" required>
+            <option value="09:00">09:00</option>
+            <option value="10:45">10:45</option>
+            <option value="13:00">13:00</option>
+            <option value="14:45">14:45</option>
+            <option value="16:30">16:30</option>
+            <option value="18:30">18:30</option>
+        </select><br><br>
 
         <label for="date">续费截止日期（2023-xx-xx）：</label>
-        <input type="text" id="date" name="date" required><br><br>
+        <input type="date" id="date" name="date" required><br><br>
 
         <label for="tname">老师姓名：</label>
         <input type="text" id="tname" name="tname" required><br><br>

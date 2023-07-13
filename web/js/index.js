@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault(); // 阻止默认表单提交行为
 
         var sname = document.getElementById('sname').value;
-        var cname = document.getElementById('cname').value;
+        var cname = document.getElementById('day').value + ' ' + document.getElementById('time').value;
         var date = document.getElementById('date').value;
         var tname = document.getElementById('tname').value;
 

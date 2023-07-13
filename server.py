@@ -1,6 +1,5 @@
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Form, Body
-from pydantic import BaseModel
+from fastapi import FastAPI, Body
 from PIL import ImageFont, ImageDraw, Image
 import time
 from starlette.responses import FileResponse
@@ -32,8 +31,8 @@ def process_form_data(data = Body()):
     class Date():
         def __init__(self, date):
             self.year, self.month, self.day = date.split('-')
-            self.month = f"{self.month:0>2}"
-            self.day = f"{self.day:0>2}"
+            # self.month = f"{self.month:0>2}"
+            # self.day = f"{self.day:0>2}"
 
     print("---------start-----------")
 
@@ -58,16 +57,16 @@ def process_form_data(data = Body()):
     if cname[2]!=' ':
         cname = cname[:2] + ' ' + cname[3:]
     
-    draw.text((500, 1745), sname, font = ImageFont.truetype(fontpath, 75), fill = (25, 25, 25))
+    draw.text((500, 1729), sname, font = ImageFont.truetype(fontpath, 75), fill = (25, 25, 25))
     draw.text((585, 2085), cname, font = ImageFont.truetype(fontpath, 50), fill = (25, 25, 25), width=255)
-    draw.text((1077, 2195), date.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1357, 2195), date.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1600, 2195), date.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1715, 2971), "松江地中海", font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1995, 3100), tname, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1745, 3232), current_time.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1961, 3232), current_time.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((2088, 3232), current_time.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1069, 2181), date.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1364, 2181), date.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1607, 2181), date.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1715, 2962), "松江地中海", font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1973, 3081), tname, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1727, 3220), current_time.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1955, 3220), current_time.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((2081, 3220), current_time.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
 
     # 保存图片到字节流
     bk_img.save("temp.jpg", format='JPEG')
@@ -81,7 +80,6 @@ def get_file(file: str):
     return FileResponse("temp.jpg", media_type="application/octet-stream")
 
 app.mount("/api/ending", StaticFiles(directory="./web/html/", html=True), name="static")
-# templates = Jinja2Templates(directory=)
 
 @app.get("/api/ending")
 async def index_response():

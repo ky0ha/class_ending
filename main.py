@@ -5,11 +5,11 @@ parser = argparse.ArgumentParser(
     prog="Complex Pic",
     description="生成结课通知单"
 )
-parser.add_argument("-n", "--name", default=None, type=str, help="学生姓名")
-parser.add_argument("-c", "--cname", default=None, type=str, help="所在班级：周x xx:xx")
-parser.add_argument("-d", "--date", default=None, type=str, help="截止日期")
-parser.add_argument("-t", "--teacher", default=None, type=str, help="老师名字")
-args = parser.parse_args()
+# parser.add_argument("-n", "--name", default=None, type=str, help="学生姓名")
+# parser.add_argument("-c", "--cname", default=None, type=str, help="所在班级：周x xx:xx")
+# parser.add_argument("-d", "--date", default=None, type=str, help="截止日期")
+# parser.add_argument("-t", "--teacher", default=None, type=str, help="老师名字")
+# args = parser.parse_args()
 # test command: python main.py -n "陈思宇" -c "周日 14:45" -d "2023-7-13" -t "ky0ha"
 
 
@@ -20,10 +20,14 @@ class Date():
 print("---------start-----------")
 
 # 获取参数
-sname = args.name
-cname = args.cname
-date = Date(args.date)
-tname = args.teacher
+# sname = args.name
+# cname = args.cname
+# date = Date(args.date)
+# tname = args.teacher
+sname = "陈思宇"
+cname = "周日 14:45"
+date = Date("2023-5-8")
+tname = "ky0ha"
 bk_img_path = r"结课通知单.jpg"
 current_time = Date(time.strftime("%Y-%m-%d"))
 
@@ -31,7 +35,7 @@ current_time = Date(time.strftime("%Y-%m-%d"))
 bk_img = Image.open(bk_img_path)
 
 #设置需要显示的字体
-fontpath = "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc"    
+fontpath = r"font\wqy-zenhei.ttc"    
 draw = ImageDraw.Draw(bk_img)
 
 # c = "周日 14:45 code4"
@@ -48,16 +52,16 @@ draw = ImageDraw.Draw(bk_img)
 # 绘制文字信息   
 # # (100,300/350)为字体的位置，(255,255,255)为白色，(0,0,0)为黑色
 
-draw.text((500, 1745), sname, font = ImageFont.truetype(fontpath, 75), fill = (25, 25, 25))
+draw.text((500, 1729), sname, font = ImageFont.truetype(fontpath, 75), fill = (25, 25, 25))
 draw.text((585, 2085), cname, font = ImageFont.truetype(fontpath, 50), fill = (25, 25, 25), width=255)
-draw.text((1077, 2195), date.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((1357, 2195), date.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((1600, 2195), date.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((1715, 2971), "松江地中海", font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((1995, 3100), tname, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((1745, 3232), current_time.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((1961, 3232), current_time.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-draw.text((2088, 3232), current_time.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1069, 2181), date.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1364, 2181), date.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1607, 2181), date.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1715, 2962), "松江地中海", font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1973, 3081), tname, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1727, 3220), current_time.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((1955, 3220), current_time.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+draw.text((2081, 3220), current_time.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
 
 
 # 保存图片路径
