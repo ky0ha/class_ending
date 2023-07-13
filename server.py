@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from PIL import ImageFont, ImageDraw, Image
 import time
 from starlette.responses import FileResponse
+from starlette.staticfiles import StaticFiles
 
 
 app = FastAPI()
@@ -79,3 +80,9 @@ def process_form_data(data = Body()):
 def get_file(file: str):
     return FileResponse("temp.jpg", media_type="application/octet-stream")
 
+app.mount("/api/ending", StaticFiles(directory="./web/html/", html=True), name="static")
+# templates = Jinja2Templates(directory=)
+
+@app.get("/api/ending")
+async def index_response():
+    return FileResponse("./web/html/")
