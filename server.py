@@ -85,4 +85,4 @@ app.mount("/api/ending", StaticFiles(directory="./web/html/", html=True), name="
 
 @app.get("/api/ending")
 async def index_response():
-    return FileResponse("./web/html/")
+    return FileResponse("./web/html/index.html")
