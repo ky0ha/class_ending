@@ -31,7 +31,7 @@ current_time = Date(time.strftime("%Y-%m-%d"))
 bk_img = Image.open(bk_img_path)
 
 #设置需要显示的字体
-fontpath = "font/simsun.ttc"    
+fontpath = "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc"    
 draw = ImageDraw.Draw(bk_img)
 
 # c = "周日 14:45 code4"
