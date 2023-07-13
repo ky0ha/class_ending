@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 在此处可以执行提交表单数据的操作，例如使用 AJAX 发送到服务器
         // 创建 XHR 对象
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://ky0ha/api/ending'); // 指定请求的 URL
+        xhr.open('POST', 'http://ky0ha.com/api/ending'); // 指定请求的 URL
         xhr.setRequestHeader('Content-Type', 'application/json'); // 设置请求头
         xhr.setRequestHeader('Access-Control-Allow-Origin', true); // 设置请求头
 
