@@ -1,3 +1,5 @@
+console.log("此项目为开源项目，如果对该项目有建议，欢迎来 https://github.com/ky0ha/class_ending 提交 pr")
+
 document.addEventListener('DOMContentLoaded', function() {
     var form = document.getElementById('myForm');
 
@@ -8,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var cname = document.getElementById('day').value + ' ' + document.getElementById('time').value;
         var date = document.getElementById('date').value;
         var tname = document.getElementById('tname').value;
+        var school = document.getElementById('school').value;
 
         // 在此处可以执行提交表单数据的操作，例如使用 AJAX 发送到服务器
         // 创建 XHR 对象
@@ -45,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
             sname: sname,
             cname: cname,
             date: date,
-            tname: tname
+            tname: tname,
+            school: school
         };
         var jsonData = JSON.stringify(formData);
 

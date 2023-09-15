@@ -43,7 +43,8 @@ def process_form_data(data = Body()):
     tname: str = data['tname']
     bk_img_path = r"结课通知单.jpg"
     current_time: Date = Date(time.strftime("%Y-%m-%d"))
-
+    school: str = data['school']
+    
     # 图片路径
     bk_img = Image.open(bk_img_path)
 
@@ -62,7 +63,7 @@ def process_form_data(data = Body()):
     draw.text((1069, 2181), date.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
     draw.text((1364, 2181), date.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
     draw.text((1607, 2181), date.day, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
-    draw.text((1715, 2962), "松江地中海", font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
+    draw.text((1715, 2962), school, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
     draw.text((1973, 3081), tname, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
     draw.text((1727, 3220), current_time.year, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
     draw.text((1955, 3220), current_time.month, font = ImageFont.truetype(fontpath, 70), fill = (25, 25, 25))
