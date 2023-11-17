@@ -44,6 +44,9 @@ def process_form_data(data = Body()):
     bk_img_path = r"结课通知单.jpg"
     current_time: Date = Date(time.strftime("%Y-%m-%d"))
     school: str = data['school']
+
+    if school not in ["松江万达", "静安大宁", "宝山顾村"]:
+        return {'status': -1}
     
     # 图片路径
     bk_img = Image.open(bk_img_path)
